@@ -3,9 +3,7 @@ import ListingCard from '../components/ListingCard';
 import { Search, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
-// FIX: Use the environment variable or fallback to the correct port 5001
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api';
+import { API_BASE_URL } from '../config';
 
 // Asset imports (local fallbacks)
 import imgGen from '../assets/logo.png';

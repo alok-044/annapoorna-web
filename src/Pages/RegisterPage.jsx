@@ -7,8 +7,7 @@ import { Loader2, FileText, User, Mail, Lock, Phone, MapPin, ArrowRight, Heart, 
 import { motion } from 'framer-motion';
 import registerImg from '../assets/reg.png';
 
-// Ensure this matches your backend port
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api';
+import { API_BASE_URL } from '../config';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({

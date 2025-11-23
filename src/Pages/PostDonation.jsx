@@ -7,8 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api';
+import { API_BASE_URL } from '../config';
 
 // --- Styled Input Component ---
 const InputGroup = ({ label, icon: Icon, ...props }) => (
