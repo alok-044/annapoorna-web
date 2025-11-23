@@ -1,9 +1,6 @@
-// src/pages/ContactPage.jsx
+// src/Pages/ContactPage.jsx
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Info } from 'lucide-react';
-import facebook from '../assets/face-logo.png';
-import twitter from '../assets/X-logo.png';
-import instagram from '../assets/insta-logo.png';
+import { Mail, Phone, MapPin, Send, Info, Facebook, Twitter, Instagram } from 'lucide-react';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -24,11 +21,12 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage('');
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 2000)); 
-        setSubmitMessage('Thank you for your message! We will get back to you soon.');
-        setFormData({ name: '', email: '', subject: '', message: '' });
 
+    try {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000)); 
+      setSubmitMessage('Thank you for your message! We will get back to you soon.');
+      setFormData({ name: '', email: '', subject: '', message: '' }); 
     } catch (error) {
       console.error('Contact form submission error:', error);
       setSubmitMessage('An error occurred. Please try again later.');
@@ -38,7 +36,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-orange-200 via-white to-red-100 py-16 px-4 sm:px-6 lg:px-8 page-fade-in">
+    <div className="min-h-screen bg-linear-to-br from-orange-50 via-white to-green-50 py-16 px-4 sm:px-6 lg:px-8 page-fade-in">
       <div className="max-w-7xl mx-auto">
         {/* Hero Section */}
         <div className="text-center mb-16">
@@ -68,31 +66,31 @@ const ContactPage = () => {
                 <Phone size={24} className="text-brand-green mt-1 shrink-0" />
                 <div>
                   <h3 className="font-semibold text-gray-900">Call Us</h3>
-                  <a href="tel:+919076456782" className="hover:text-brand-orange transition-colors">+91 9076456782</a>
+                  <a href="tel:+1234567890" className="hover:text-brand-orange transition-colors">+1 (234) 567-890</a>
                 </div>
               </div>
               <div className="flex items-start gap-4 text-gray-700 text-lg">
                 <MapPin size={24} className="text-brand-green mt-1 shrink-0" />
                 <div>
                   <h3 className="font-semibold text-gray-900">Our Office</h3>
-                  <p>123 Food Drive, Greater Noida, PIN 201310</p>
-                  <p>India</p>
+                  <p>123 Food Drive, Nourish City, FC 45678</p>
+                  <p>United States</p>
                 </div>
               </div>
             </div>
             
-            {/* Social Media Links (Optional) */}
+            {/* Social Media Links */}
             <div className="mt-10 pt-6 border-t border-gray-100">
               <h3 className="font-semibold text-gray-900 mb-4 text-xl">Follow Us</h3>
               <div className="flex gap-4">
-                <a href="#" className="text-gray-500 hover:text-brand-orange transition-colors">
-                  <img src={facebook} alt="Facebook" className="w-10 h-10" />
+                <a href="#" className="p-3 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:scale-110 transition-all">
+                  <Facebook size={24} />
                 </a>
-                <a href="#" className="text-gray-500 hover:text-brand-orange transition-colors">
-                  <img src={twitter} alt="Twitter" className="mt-2.5 w-10 h-6" />
+                <a href="#" className="p-3 rounded-full bg-sky-50 text-sky-500 hover:bg-sky-100 hover:scale-110 transition-all">
+                  <Twitter size={24} />
                 </a>
-                <a href="https://www.instagram.com/annapoornaconnect/" className="text-gray-500 hover:text-brand-orange transition-colors">
-                  <img src={instagram} alt="Instagram" className="mt-1.5  w-8 h-8" />
+                <a href="#" className="p-3 rounded-full bg-pink-50 text-pink-600 hover:bg-pink-100 hover:scale-110 transition-all">
+                  <Instagram size={24} />
                 </a>
               </div>
             </div>
@@ -113,7 +111,8 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-green focus:border-brand-green outline-none transition-all"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green outline-none transition-all"
+                  placeholder="John Doe"
                 />
               </div>
               <div>
@@ -125,7 +124,8 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-green focus:border-brand-green outline-none transition-all"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green outline-none transition-all"
+                  placeholder="john@example.com"
                 />
               </div>
               <div>
@@ -137,7 +137,8 @@ const ContactPage = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-green focus:border-brand-green outline-none transition-all"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green outline-none transition-all"
+                  placeholder="How can we help?"
                 />
               </div>
               <div>
@@ -149,29 +150,27 @@ const ContactPage = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-brand-green focus:border-brand-green outline-none transition-all"
+                  className="mt-1 block w-full px-4 py-3 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green outline-none transition-all"
+                  placeholder="Write your message here..."
                 ></textarea>
               </div>
               <div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-lg text-white bg-brand-orange hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-orange transition-all duration-200"
+                  className="w-full inline-flex justify-center py-3.5 px-6 border border-transparent shadow-sm text-lg font-bold rounded-xl text-white bg-brand-orange hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-orange transition-all duration-200 transform active:scale-[0.98]"
                 >
                   {isSubmitting ? (
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
+                    <Loader2 className="animate-spin h-6 w-6" />
                   ) : (
                     <>
-                      <Send size={20} className="mr-3" /> Send Message
+                      <Send size={20} className="mr-2" /> Send Message
                     </>
                   )}
                 </button>
               </div>
               {submitMessage && (
-                <div className={`mt-4 p-3 rounded-lg text-center ${submitMessage.includes('Thank you') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                <div className={`mt-4 p-4 rounded-xl text-center font-medium ${submitMessage.includes('Thank you') ? 'bg-green-50 text-green-800 border border-green-100' : 'bg-red-50 text-red-800 border border-red-100'}`}>
                   {submitMessage}
                 </div>
               )}

@@ -1,9 +1,6 @@
-// src/contexts/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
-
-// --- FIX: Match the port (5001) from your backend logs ---
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:5001/api';
+import { API_BASE_URL } from '../config'; // --- FIX: Import from config ---
 
 const AuthContext = createContext(null);
 
