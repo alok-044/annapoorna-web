@@ -38,7 +38,18 @@ const SmartScan = ({ onScanComplete }) => {
         reader.readAsDataURL(file);
       });
 
-      const genAI = new GoogleGenerativeAI(API_KEY);
+      // Some versions of the `@google/generative-ai` client accept a plain API key,
+      // others expect an options object. Try both patterns to improve compatibility.
+      let genAI;
+      try {
+        genAI = new GoogleGenerativeAI(API_KEY);
+      } catch (e) {
+        try {
+          genAI = new GoogleGenerativeAI({ apiKey: API_KEY });
+        } catch (e2) {
+          throw new Error(`API client initialization failed: ${e.message || e} ${e2 ? ' / ' + (e2.message || e2) : ''}`);
+        }
+      }
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
       const prompt = `You are a food donation platform AI. Analyze this food image and extract information.
@@ -99,8 +110,16 @@ IMPORTANT: Return ONLY a valid JSON object with NO markdown, NO backticks, NO ad
       
       let errorMessage = "Could not analyze image. Please try again.";
       
-      if (error.message.includes("API key")) {
+      if (error.message.includes("API key") || error.message.includes('API client initialization failed')) {
         errorMessage = "API key error. Please check your configuration.";
+        // Provide extra troubleshooting steps in the console so the user can act on them.
+        console.error("SmartScan API Key Troubleshooting:\n" +
+          "1) Ensure you set VITE_GEMINI_API_KEY in `annapoorna-web/.env` (restart Vite after editing).\n" +
+          "2) Verify the key in Google Cloud Console: the Generative AI API (or appropriate API) must be enabled and billing enabled on your project.\n" +
+          "3) If the key has Application or HTTP referrer restrictions, remove or adjust them for localhost (e.g., add http://localhost:5173) while testing.\n" +
+          "4) For production, use a restricted key and host the calls from a secure serverless function if required.\n" +
+          "5) If you still see errors, paste the full error from the browser console into your next message so I can help further.");
+      
       } else if (error.message.includes("Invalid response")) {
         errorMessage = "Could not analyze image. Please try a different image.";
       } else if (error.message.includes("Missing required fields")) {
